@@ -1,8 +1,10 @@
-package com.talkster.auth;
+package com.talkster.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.talkster.auth.UserService;
 
 @RestController
 public class UserAuthController {
@@ -13,9 +15,8 @@ public class UserAuthController {
         this.userService = userService;
     }
 
-    @PostMapping("/api/signup")
-    public void create(@RequestParam String username, @RequestParam String password){
-        System.out.println("Attempting to create user beep boop");
+    @PostMapping("/signup")
+    public void signup(@RequestParam String username, @RequestParam String password){
         userService.createUser(username, password); 
     }
 }

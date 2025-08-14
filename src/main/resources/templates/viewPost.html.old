@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title></title>
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <h1>Post</h1> 
+        <h2>By <span th:text="${post.author.username}"></span></h2>
+        <p th:text="${post.body}"></p>
+        <form id="commentForm">
+            <input type="text" name="body" id="commentBody" placeholder="Leaver a comment...">
+            <input type="hidden" id="authorUsername" th:value="${#authentication.name}"/>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" id="csrfToken">
+            <input type="submit">
+        </form>
+        <ul id="commentSection">
+            <h3>Comments</h3>
+            <li th:each="comment : ${comments}">
+                <strong th:text="${comment.author.username}"></strong>:
+                <span th:text="${comment.body}"></span>
+            </li>
+        </ul>
+        <a href="/dashboard">Go Back</a>
+        <script src="/js/viewPost.js"></script>
+    </body>
+</html>

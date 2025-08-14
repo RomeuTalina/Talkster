@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+       <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Make a post</title>
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <form method="post" action="/api/post" id="postForm">
+            <input type="hidden" id="authorUsername" th:value="${#authentication.name}"/>
+            <label for="body">Body: </label>
+            <input type="text" name="body" id="body">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" id="csrfToken">
+            <input type="submit" h>
+        </form>
+        <a href="/dashboard">Cancel</a>
+        <script src="/js/post.js"></script>
+    </body>
+</html>

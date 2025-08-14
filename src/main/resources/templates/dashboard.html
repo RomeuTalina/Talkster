@@ -1,15 +1,51 @@
-<h3 th:inline="text">Welcome <span sec:authentication="principal.username"></span></h3>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-gray-100">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title></title>
+        <title>Talkster Dashboard</title>
+        <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
     </head>
-    <body>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Logout" />
-        </form> 
+    <body class="min-h-screen flex flex-col items-center p-6">
+        <!-- Header -->
+        <header class="w-full max-w-4xl flex justify-between items-center mb-6">
+            <h1 class="text-4xl font-extrabold text-green-600">Talkster</h1>
+            <form th:action="@{/logout}" method="post" class="ml-auto">
+                <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded transition-colors">
+                    Logout
+                </button>
+            </form>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="w-full max-w-4xl mb-6 flex justify-start space-x-4">
+            <a href="/post" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors">
+                Create Post
+            </a>
+        </nav>
+
+        <!-- Welcome -->
+        <div class="w-full max-w-4xl mb-6">
+            <h3 class="text-xl font-medium text-gray-700" th:inline="text">
+                Welcome <span sec:authentication="principal.username"></span>!
+            </h3>
+        </div>
+
+        <!-- Posts Feed -->
+        <main class="w-full max-w-4xl bg-white shadow-md rounded-lg p-6">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-800">Posts Feed</h2>
+            <ul id="postFeed" class="space-y-4">
+                <li th:each="post : ${posts}" class="p-4 bg-gray-50 hover:bg-gray-100 rounded transition-colors shadow-sm">
+                    <a th:href="@{/post/{id}(id=${post.id})}" class="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center">
+                        <div>
+                            <strong class="text-green-600 font-semibold" th:text="${post.author.username}"></strong>
+                            <p class="text-gray-700" th:text="${post.body}"></p>
+                        </div>
+                        <span class="text-gray-400 text-sm mt-2 sm:mt-0">View & Comment</span>
+                    </a>
+                </li>
+            </ul>
+        </main>
     </body>
 </html>

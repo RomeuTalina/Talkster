@@ -1,0 +1,27 @@
+<h3 th:inline="text">Welcome <span sec:authentication="principal.username"></span></h3>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Talkster</title>
+        <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <h1 class="text-green-500 text-4xl font-bold">Talkster</h1>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout" />
+        </form> 
+        <a href="/post">POST</a>
+        <ul id="postFeed">
+            <h2>Posts</h2>
+            <li th:each="post : ${posts}">
+                <a th:href="@{/post/{id}(id=${post.id})}">
+                    <strong th:text="${post.author.username}"></strong>:
+                    <span th:text="${post.body}"></span>
+                </a>
+            </li>
+        </ul>
+    </body>
+</html>

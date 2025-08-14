@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-gray-100">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Make a Post</title>
+    <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body class="min-h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Create a Post</h1>
+
+        <form method="post" action="/api/post" id="postForm" class="flex flex-col space-y-4">
+            <input type="hidden" id="authorUsername" th:value="${#authentication.name}"/>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" id="csrfToken">
+
+            <div>
+                <label for="body" class="block text-gray-700 mb-1">Post Body</label>
+                <!-- <input type="text" name="body" id="body" placeholder="Write your post here..." -->
+                <!--     class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"> -->
+                <textarea name="body" id="body" rows="5" placeholder="Write your post here..."
+                    class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"></textarea>
+            </div>
+            <button type="submit"
+                class="bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded transition-colors">
+                Submit
+            </button>
+        </form>
+
+        <div class="mt-4 text-center">
+            <a href="/dashboard" class="text-blue-500 hover:underline">Cancel</a>
+        </div>
+    </div>
+
+    <script src="/js/post.js"></script>
+</body>
+</html>

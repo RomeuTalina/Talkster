@@ -21,7 +21,6 @@ public class User {
     private String role;
     private boolean enabled;
 
-
     // Getters and Setters 
 
 	public Long getId() {
